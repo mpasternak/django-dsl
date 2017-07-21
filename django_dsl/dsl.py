@@ -12,7 +12,8 @@ tokens = (
     'EQUAL',
     'LESSER_GREATER',
     'REGEX',
-    'IN'
+    'IN',
+    'NULL'
 )
 
 literals = '()[],'

@@ -8,9 +8,15 @@
 from django.db.models import Q
 
 from .dsl import compa2lookup, tokens
-from .exceptions import CompileException, NoSuchShortcutError
+from .exceptions import CompileException
 
 tokens  # NOQA
+
+
+def get_shortcut(key):
+    # This function gets monkeypatched in django_dsl.compiler as a part
+    # of a normal usage.
+    raise NotImplementedError
 
 
 def p_expression_b_op(p):
@@ -61,9 +67,8 @@ def p_expression_ID(p):
     lookup = compa2lookup[p[2]]
 
     try:
-        from .compiler import get_shortcut
         field = get_shortcut(p[1])
-    except NoSuchShortcutError:
+    except KeyError:
         field = p[1]
 
     if lookup:
@@ -83,6 +88,7 @@ def p_value(p):
     '''value : STRING
             | NUMBER
             | DATE
+            | NULL
             | paren_list
             '''
     p[0] = p[1]

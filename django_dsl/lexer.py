@@ -14,6 +14,10 @@ def t_STRING(t):
     t.value = t.value[1:-1]
     return t
 
+def t_NULL(t):
+    r'NULL'
+    t.value = None
+    return t
 
 def t_DATE(t):
     r'(?P<year>\d{4})-(?P<month>\d{1,2})-(?P<day>\d{1,2})'
@@ -52,8 +56,8 @@ def t_FIELD(t):
 
 
 def t_error(t):
-    raise CompileException(u"Cannot make sense of char: %s" % t.value[0])
+    raise CompileException("Cannot make sense of char: %s" % t.value[0])
 
 
-# ignore tabs and spaces
-t_ignore = ' \t'
+# ignore tabs and spaces and newlines
+t_ignore = ' \t\n'
