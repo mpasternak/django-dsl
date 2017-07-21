@@ -12,6 +12,8 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from django_dsl import compiler
+from django_dsl.exceptions import CompileException
+from django_dsl.fields import DjangoDSLField
 from django_dsl.validators import DjangoDSLValidator
 
 
@@ -43,3 +45,7 @@ class TestDjango_dsl(TestCase):
             ValidationError,
             DjangoDSLValidator,
             "110g8 ru08q35 0g80as8d u1!! !+!)")
+
+    def test_field(self):
+        f = DjangoDSLField()
+        assert DjangoDSLValidator in f.validators
