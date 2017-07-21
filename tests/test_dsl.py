@@ -12,17 +12,26 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from django_dsl import compiler
-from django_dsl.exceptions import CompileException
 from django_dsl.fields import DjangoDSLField
 from django_dsl.validators import DjangoDSLValidator
 
 
 class TestDjango_dsl(TestCase):
     def test_dsl(self):
-        compiler.register_shortcut("g", "groups__name")
-        compiler.register_shortcut("s", "state__name")
+        shortcuts = {
+            "g": "groups__name",
+            "s": "state__name"
+        }
         input = '(modified >= 2011-1-1 AND NOT s = "OK") OR g="XXX"'
-        compiler.compile(input)
+        res = compiler.compile(input, shortcuts)
+        assert res.children[1][0] == "groups__name"
+
+    def test_null(self):
+        res = compiler.compile("modified = NULL")
+        assert res.children[0][1] is None
+
+        res = compiler.compile('modified = "NULL"')
+        assert res.children[0][1] == "NULL"
 
     def test_in(self):
         compiler.compile("modified IN [ 123 ]")
