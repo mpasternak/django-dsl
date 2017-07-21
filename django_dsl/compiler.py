@@ -5,16 +5,23 @@ from ply.yacc import yacc
 
 from .exceptions import NoSuchShortcutError
 
-__shotcuts = None
+__shortcuts = None
 
 
 def register_shortcut(key, value):
-    __shotcuts[key] = value
+    global __shortcuts
+    if __shortcuts is None:
+        __shortcuts = {}
+
+    __shortcuts[key] = value
 
 
 def get_shortcut(key):
+    global __shortcuts
+    if __shortcuts is None:
+        __shortcuts = {}
     try:
-        return __shotcuts[key]
+        return __shortcuts[key]
     except KeyError:
         raise NoSuchShortcutError(key)
 
