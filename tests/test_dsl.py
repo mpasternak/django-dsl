@@ -8,9 +8,11 @@ test_django-dsl
 Tests for `django-dsl` module.
 """
 
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from django_dsl import compiler
+from django_dsl.validators import DjangoDSLValidator
 
 
 class TestDjango_dsl(TestCase):
@@ -24,3 +26,19 @@ class TestDjango_dsl(TestCase):
         res = compiler.compile("modified IN [ 123 , 123 ]")
         res = compiler.compile("modified = [ 123 , 123 , 123 ]")
         res = compiler.compile('range IN [1, "2", 2011-1-1]')
+
+    def test_validation(self):
+        self.assertRaises(
+            ValidationError,
+            DjangoDSLValidator,
+            None)
+
+        self.assertRaises(
+            ValidationError,
+            DjangoDSLValidator,
+            "  ")
+
+        self.assertRaises(
+            ValidationError,
+            DjangoDSLValidator,
+            "110g8 ru08q35 0g80as8d u1!! !+!)")
