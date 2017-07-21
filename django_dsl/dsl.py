@@ -19,7 +19,7 @@ literals = '()[],'
 
 compa2lookup = {
     '=': '',
-    '~': 'contains',
+    '~': 'icontains',
     '~~': 'regex',
     '>': 'gt',
     '>=': 'gte',
