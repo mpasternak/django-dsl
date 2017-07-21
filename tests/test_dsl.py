@@ -20,12 +20,13 @@ class TestDjango_dsl(TestCase):
         compiler.register_shortcut("g", "groups__name")
         compiler.register_shortcut("s", "state__name")
         input = '(modified >= 2011-1-1 AND NOT s = "OK") OR g="XXX"'
+        compiler.compile(input)
 
     def test_in(self):
-        res = compiler.compile("modified IN [ 123 ]")
-        res = compiler.compile("modified IN [ 123 , 123 ]")
-        res = compiler.compile("modified = [ 123 , 123 , 123 ]")
-        res = compiler.compile('range IN [1, "2", 2011-1-1]')
+        compiler.compile("modified IN [ 123 ]")
+        compiler.compile("modified IN [ 123 , 123 ]")
+        compiler.compile("modified = [ 123 , 123 , 123 ]")
+        compiler.compile('range IN [1, "2", 2011-1-1]')
 
     def test_validation(self):
         self.assertRaises(

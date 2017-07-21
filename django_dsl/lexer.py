@@ -36,9 +36,11 @@ t_LESSER_GREATER = '[<>]=?'
 
 t_REGEX = '~~?'
 
+
 def t_IN(t):
     r" IN "
     return t
+
 
 def t_FIELD(t):
     r'[A-Za-z_][\w_]*'
