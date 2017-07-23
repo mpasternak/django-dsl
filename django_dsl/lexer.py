@@ -56,8 +56,9 @@ def t_FIELD(t):
 
 
 def t_error(t):
-    raise CompileException("Cannot make sense of char: %s" % t.value[0])
+    raise CompileException("Cannot make sense of char: %s (ord: %i)" %
+                           t.value[0], ord(t.value[0]))
 
 
 # ignore tabs and spaces and newlines
-t_ignore = ' \t\n'
+t_ignore = ' \t\n\r'

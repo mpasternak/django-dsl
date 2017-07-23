@@ -20,7 +20,7 @@ def compile(expr, shortcuts=None):
     # to extend PLY, but this could really use some re-work. This is not
     # thread safe at all and we're playing with module globals here.
     dsl_parser.get_shortcut = lambda key: shortcuts[key]
-    
+
     parser = yacc(
         module=dsl_parser,
         debug=False,
