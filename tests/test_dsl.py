@@ -38,6 +38,10 @@ class TestDjango_dsl(TestCase):
         compiler.compile("modified IN [ 123 , 123 ]")
         compiler.compile("modified = [ 123 , 123 , 123 ]")
         compiler.compile('range IN [1, "2", 2011-1-1]')
+        compiler.compile("""range 
+
+
+IN [1, "2", 2011-1-1]""")
 
     def test_validation(self):
         self.assertRaises(
