@@ -7,6 +7,7 @@ test_django-dsl
 
 Tests for `django-dsl` module.
 """
+from distutils.errors import CCompilerError
 
 from django.core.exceptions import ValidationError
 from django.test import TestCase
@@ -14,7 +15,7 @@ from django.test import TestCase
 from django_dsl import compiler
 from django_dsl.fields import DjangoDSLField
 from django_dsl.validators import DjangoDSLValidator
-
+from django_dsl import exceptions
 
 class TestDjango_dsl(TestCase):
     def test_dsl(self):
@@ -62,3 +63,7 @@ IN [1, "2", 2011-1-1]""")
     def test_field(self):
         f = DjangoDSLField()
         assert DjangoDSLValidator in f.validators
+
+    def test_t_error_bug(self):
+        with self.assertRaises(exceptions.CompileException):
+            compiler.compile("some_field ~ 'test'")

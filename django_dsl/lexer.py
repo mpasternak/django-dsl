@@ -56,8 +56,13 @@ def t_FIELD(t):
 
 
 def t_error(t):
-    raise CompileException("Cannot make sense of char: %s (ord: %i)" %
-                           t.value[0], ord(t.value[0]))
+    try:
+        raise CompileException("Cannot make sense of char: %s (ord: %i)" %
+                               t.value[0], ord(t.value[0]))
+    except TypeError:
+        raise CompileException(
+            f"Compilation error near token {t.value} in line {t.lineno}, "
+            f"position {t.lexpos}")
 
 
 # ignore tabs and spaces and newlines
