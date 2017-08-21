@@ -17,6 +17,16 @@ from django_dsl.fields import DjangoDSLField
 from django_dsl.validators import DjangoDSLValidator
 from django_dsl import exceptions
 
+
+from django.conf import settings
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['/path/to/template'],
+    }
+]
+settings.TEMPLATES = TEMPLATES
+
 class TestDjango_dsl(TestCase):
     def test_dsl(self):
         shortcuts = {
@@ -33,6 +43,15 @@ class TestDjango_dsl(TestCase):
 
         res = compiler.compile('modified = "NULL"')
         assert res.children[0][1] == "NULL"
+
+    def test_templates(self):
+        res = compiler.compile("modified = {{ foobar|default:5 }}")
+        assert res.children[0][1] == 5
+
+        res = compiler.compile("modified = {{ foobar|default:5 }}",
+                               context={"foobar": 10})
+        assert res.children[0][1] == 10
+
 
     def test_in(self):
         compiler.compile("modified IN [ 123 ]")
