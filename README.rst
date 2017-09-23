@@ -3,14 +3,17 @@ Django DSL
 =============================
 
 .. image:: https://badge.fury.io/py/django-dsl.svg
-    :target: https://badge.fury.io/py/django-dsl
-
+	   :target: https://badge.fury.io/py/django-dsl
+		    
 .. image:: https://travis-ci.org/mpasternak/django-dsl.svg?branch=master
     :target: https://travis-ci.org/mpasternak/django-dsl
 
 .. image:: https://codecov.io/gh/mpasternak/django-dsl/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/mpasternak/django-dsl
 
+.. image:: https://coveralls.io/repos/github/mpasternak/django-dsl/badge.svg?branch=master
+   :target: https://coveralls.io/github/mpasternak/django-dsl?branch=master
+	     
 DSL for Django ORM
 
 This is a simple query language for Django ORM. You can give it to your
