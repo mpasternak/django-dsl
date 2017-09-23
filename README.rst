@@ -8,9 +8,6 @@ Django DSL
 .. image:: https://travis-ci.org/mpasternak/django-dsl.svg?branch=master
     :target: https://travis-ci.org/mpasternak/django-dsl
 
-.. image:: https://codecov.io/gh/mpasternak/django-dsl/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/mpasternak/django-dsl
-
 .. image:: https://coveralls.io/repos/github/mpasternak/django-dsl/badge.svg?branch=master
    :target: https://coveralls.io/github/mpasternak/django-dsl?branch=master
 	     
