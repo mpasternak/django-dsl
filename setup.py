@@ -88,7 +88,7 @@ setup(
         'django_dsl',
     ],
     include_package_data=True,
-    install_requires=["ply>=3.10", "Django>=1.10"],
+    install_requires=["ply", "Django"],
     license="MIT",
     zip_safe=False,
     keywords='django-dsl',
