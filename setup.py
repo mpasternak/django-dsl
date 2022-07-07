@@ -40,7 +40,11 @@ class compile_translations(Command):
     def run(self):
         curdir = os.getcwd()
         os.chdir(os.path.realpath('django_dsl'))
-        from django.core.management import call_command
+        try:
+            from django.core.management import call_command
+        except ImportError:
+            warnings.warn("Django not importable in this environment, translations will not be build")
+            return
         call_command('compilemessages')
         os.chdir(curdir)
 
