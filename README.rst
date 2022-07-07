@@ -5,8 +5,8 @@ Django DSL
 .. image:: https://badge.fury.io/py/django-dsl.svg
 	   :target: https://badge.fury.io/py/django-dsl
 		    
-.. image:: https://travis-ci.org/mpasternak/django-dsl.svg?branch=master
-    :target: https://travis-ci.org/mpasternak/django-dsl
+.. image:: https://github.com/yourlabs/django-session-security/actions/workflows/tests.yml/badge.svg
+        :target: https://github.com/yourlabs/django-session-security/actions
 
 .. image:: https://coveralls.io/repos/github/mpasternak/django-dsl/badge.svg?branch=master
    :target: https://coveralls.io/github/mpasternak/django-dsl?branch=master
