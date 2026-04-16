@@ -16,26 +16,28 @@ clean-pyc: ## remove Python file artifacts
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 
-lint: ## check style with flake8
-	flake8 django_dsl tests --exclude=parsetab.py
+lint: ## check style with ruff
+	uv run ruff check django_dsl tests
+
+format: ## format code with ruff
+	uv run ruff format django_dsl tests
 
 test: ## run tests quickly with the default Python
-	python runtests.py tests
+	uv run pytest
 
 test-all: ## run tests on every Python version with tox
 	tox
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source django_dsl runtests.py tests
-	coverage report -m
-	coverage html
+	uv run coverage run --source django_dsl -m pytest
+	uv run coverage report -m
+	uv run coverage html
 	open htmlcov/index.html
 
-
 release: clean ## package and upload a release
-	python setup.py sdist upload
-	python setup.py bdist_wheel upload
+	uv build
+	uv publish
 
 sdist: clean ## package
-	python setup.py sdist
+	uv build
 	ls -l dist
