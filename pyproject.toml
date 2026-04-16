@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-dsl"
+dynamic = ["version"]
+description = "DSL for Django ORM"
+readme = "README.rst"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Michał Pasternak", email = "michal.dtz@gmail.com" }]
+keywords = ["django-dsl"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.1",
+    "Framework :: Django :: 5.2",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = ["ply>=3.10", "Django>=4.2"]
+
+[project.optional-dependencies]
+dev = ["bump-my-version"]
+test = ["pytest", "pytest-django"]
+
+[project.urls]
+Homepage = "https://github.com/mpasternak/django-dsl"
+
+[tool.setuptools.dynamic]
+version = { attr = "django_dsl.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["django_dsl*"]
+
+[tool.setuptools.package-data]
+django_dsl = ["locale/**/*.mo", "locale/**/*.po"]
