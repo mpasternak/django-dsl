@@ -50,6 +50,9 @@ tag = true
 [[tool.bumpversion.files]]
 filename = "django_dsl/__init__.py"
 
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+
 [tool.ruff]
 line-length = 119
 target-version = "py310"

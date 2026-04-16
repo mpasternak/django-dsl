@@ -7,8 +7,6 @@ test_django-dsl
 
 Tests for `django-dsl` module.
 """
-from distutils.errors import CCompilerError
-
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
