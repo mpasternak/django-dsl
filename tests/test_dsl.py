@@ -7,6 +7,7 @@ test_django-dsl
 
 Tests for `django-dsl` module.
 """
+
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 
@@ -17,20 +18,19 @@ from django_dsl import exceptions
 
 
 from django.conf import settings
+
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/path/to/template'],
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": ["/path/to/template"],
     }
 ]
 settings.TEMPLATES = TEMPLATES
 
+
 class TestDjango_dsl(TestCase):
     def test_dsl(self):
-        shortcuts = {
-            "g": "groups__name",
-            "s": "state__name"
-        }
+        shortcuts = {"g": "groups__name", "s": "state__name"}
         input = '(modified >= 2011-1-1 AND NOT s = "OK") OR g="XXX"'
         res = compiler.compile(input, shortcuts)
         assert res.children[1][0] == "groups__name"
@@ -46,36 +46,25 @@ class TestDjango_dsl(TestCase):
         res = compiler.compile("modified = {{ foobar|default:5 }}")
         assert res.children[0][1] == 5
 
-        res = compiler.compile("modified = {{ foobar|default:5 }}",
-                               context={"foobar": 10})
+        res = compiler.compile("modified = {{ foobar|default:5 }}", context={"foobar": 10})
         assert res.children[0][1] == 10
-
 
     def test_in(self):
         compiler.compile("modified IN [ 123 ]")
         compiler.compile("modified IN [ 123 , 123 ]")
         compiler.compile("modified = [ 123 , 123 , 123 ]")
         compiler.compile('range IN [1, "2", 2011-1-1]')
-        compiler.compile("""range 
+        compiler.compile("""range
 
 
 IN [1, "2", 2011-1-1]""")
 
     def test_validation(self):
-        self.assertRaises(
-            ValidationError,
-            DjangoDSLValidator,
-            None)
+        self.assertRaises(ValidationError, DjangoDSLValidator, None)
 
-        self.assertRaises(
-            ValidationError,
-            DjangoDSLValidator,
-            "  ")
+        self.assertRaises(ValidationError, DjangoDSLValidator, "  ")
 
-        self.assertRaises(
-            ValidationError,
-            DjangoDSLValidator,
-            "110g8 ru08q35 0g80as8d u1!! !+!)")
+        self.assertRaises(ValidationError, DjangoDSLValidator, "110g8 ru08q35 0g80as8d u1!! !+!)")
 
     def test_field(self):
         f = DjangoDSLField()

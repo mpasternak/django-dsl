@@ -20,29 +20,29 @@ def get_shortcut(key):
 
 
 def p_expression_b_op(p):
-    '''expression : expression B_OP expression'''
-    if p[2] == 'AND':
+    """expression : expression B_OP expression"""
+    if p[2] == "AND":
         p[0] = p[1] & p[3]
-    elif p[2] == 'OR':
+    elif p[2] == "OR":
         p[0] = p[1] | p[3]
 
 
 def p_expression_u_op(p):
-    '''expression : U_OP expression'''
-    if p[1] == 'NOT':
-        p[0] = ~ p[2]
+    """expression : U_OP expression"""
+    if p[1] == "NOT":
+        p[0] = ~p[2]
 
 
 def p_expression_paren(p):
-    "expression : '(' expression ')' "
+    "expression : '(' expression ')'"
     p[0] = p[2]
 
 
 def p_operation(p):
     """operation : EQUAL
-                 | LESSER_GREATER
-                 | REGEX
-                 | IN
+    | LESSER_GREATER
+    | REGEX
+    | IN
     """
     p[0] = p[1]
 
@@ -54,7 +54,7 @@ def p_paren_list(val):
 
 def p_flat_list(val):
     """flat_list : value
-                 | value ',' flat_list"""
+    | value ',' flat_list"""
 
     val[0] = [val[1]]
     if len(val) > 2:
@@ -62,8 +62,7 @@ def p_flat_list(val):
 
 
 def p_expression_ID(p):
-    """expression : FIELD operation value
-    """
+    """expression : FIELD operation value"""
     lookup = compa2lookup[p[2]]
 
     try:
@@ -72,7 +71,7 @@ def p_expression_ID(p):
         field = p[1]
 
     if lookup:
-        field = '%s__%s' % (field, lookup)
+        field = "%s__%s" % (field, lookup)
 
     # In some situations (which ones?), python
     # refuses unicode strings as dict keys for
@@ -85,22 +84,22 @@ def p_expression_ID(p):
 
 
 def p_value(p):
-    '''value : STRING
-            | NUMBER
-            | DATE
-            | NULL
-            | paren_list
-            '''
+    """value : STRING
+    | NUMBER
+    | DATE
+    | NULL
+    | paren_list
+    """
     p[0] = p[1]
 
 
 def p_error(p):
     if p:
-        raise CompileException(u"Parsing error around token: %s" % p.value)
-    raise CompileException(u"Parsing error: unexpected end of expression")
+        raise CompileException("Parsing error around token: %s" % p.value)
+    raise CompileException("Parsing error: unexpected end of expression")
 
 
 precedence = (
-    ('left', 'B_OP'),
-    ('right', 'U_OP'),
+    ("left", "B_OP"),
+    ("right", "U_OP"),
 )

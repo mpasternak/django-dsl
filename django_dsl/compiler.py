@@ -16,6 +16,7 @@ def compile(expr, shortcuts=None, context=None):
         context = {}
 
     from . import lexer
+
     lexer = lex.lex(module=lexer)
 
     from . import parser as dsl_parser
@@ -28,9 +29,5 @@ def compile(expr, shortcuts=None, context=None):
     # Render the template
     expr = Template(expr).render(Context(context))
 
-    parser = yacc(
-        module=dsl_parser,
-        debug=False,
-        picklefile=Path(__file__).parent / "parser_pickled.bin"
-    )
+    parser = yacc(module=dsl_parser, debug=False, picklefile=Path(__file__).parent / "parser_pickled.bin")
     return parser.parse(expr, lexer=lexer)
