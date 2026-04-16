@@ -41,3 +41,11 @@ include = ["django_dsl*"]
 
 [tool.setuptools.package-data]
 django_dsl = ["locale/**/*.mo", "locale/**/*.po"]
+
+[tool.bumpversion]
+current_version = "0.1.12"
+commit = true
+tag = true
+
+[[tool.bumpversion.files]]
+filename = "django_dsl/__init__.py"
