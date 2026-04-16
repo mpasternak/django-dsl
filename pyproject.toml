@@ -49,3 +49,10 @@ tag = true
 
 [[tool.bumpversion.files]]
 filename = "django_dsl/__init__.py"
+
+[tool.ruff]
+line-length = 119
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
