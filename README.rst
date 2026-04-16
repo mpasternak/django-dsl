@@ -3,10 +3,16 @@ Django DSL
 =============================
 
 .. image:: https://badge.fury.io/py/django-dsl.svg
-	   :target: https://badge.fury.io/py/django-dsl
+    :target: https://badge.fury.io/py/django-dsl
 
-.. image:: https://github.com/mpasternak/django-dsl/actions/workflows/tests.yml/badge.svg
-        :target: https://github.com/mpasternak/django-dsl/actions
+.. image:: https://github.com/mpasternak/django-dsl/actions/workflows/tests.yml/badge.svg?branch=master
+    :target: https://github.com/mpasternak/django-dsl/actions/workflows/tests.yml
+
+.. warning::
+
+    **This project is not actively maintained.** Consider using
+    `djangoql <https://github.com/ivelum/djangoql>`_ instead, which provides
+    a more feature-rich query language for Django ORM.
 
 DSL for Django ORM
 
@@ -18,6 +24,20 @@ From one side, you feed it with a string, supplied by the user. And, it
 gives you Q-objects, ready to be used in ``QuerySet.filter()`` call.
 
 Please see ``tests/test_dsl.py`` file for example usage.
+
+
+Supported versions
+------------------
+
++------------+------+------+------+------+
+|            | 3.10 | 3.11 | 3.12 | 3.13 |
++============+======+======+======+======+
+| Django 4.2 |  Yes |  Yes |  Yes |  Yes |
++------------+------+------+------+------+
+| Django 5.1 |  Yes |  Yes |  Yes |  Yes |
++------------+------+------+------+------+
+| Django 5.2 |  Yes |  Yes |  Yes |  Yes |
++------------+------+------+------+------+
 
 
 Running Tests
