@@ -49,6 +49,13 @@ class TestDjango_dsl(TestCase):
         res = compiler.compile("modified = {{ foobar|default:5 }}", context={"foobar": 10})
         assert res.children[0][1] == 10
 
+    def test_template_context_not_html_escaped(self):
+        # Parameter values feed the DSL, not HTML. Autoescaping would turn
+        # query-significant characters (``&``, ``<``, ``"``) into entities and
+        # corrupt the parsed value.
+        res = compiler.compile('modified = "{{ v }}"', context={"v": "A & B"})
+        assert res.children[0][1] == "A & B"
+
     def test_in(self):
         compiler.compile("modified IN [ 123 ]")
         compiler.compile("modified IN [ 123 , 123 ]")

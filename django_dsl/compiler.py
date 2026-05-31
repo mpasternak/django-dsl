@@ -26,8 +26,10 @@ def compile(expr, shortcuts=None, context=None):
     # thread safe at all and we're playing with module globals here.
     dsl_parser.get_shortcut = lambda key: shortcuts[key]
 
-    # Render the template
-    expr = Template(expr).render(Context(context))
+    # Render the template. autoescape=False: parameter values feed the DSL,
+    # not HTML; escaping would turn query-significant characters (``<``, ``&``,
+    # ``"``) into entities and corrupt the expression.
+    expr = Template(expr).render(Context(context, autoescape=False))
 
     parser = yacc(module=dsl_parser, debug=False, picklefile=Path(__file__).parent / "parser_pickled.bin")
     return parser.parse(expr, lexer=lexer)

@@ -43,7 +43,7 @@ include = ["django_dsl*"]
 django_dsl = ["locale/**/*.mo", "locale/**/*.po"]
 
 [tool.bumpversion]
-current_version = "0.1.12"
+current_version = "0.1.14"
 commit = true
 tag = true
 

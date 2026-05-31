@@ -3,6 +3,13 @@
 History
 -------
 
+0.1.14 (2026-05-31)
++++++++++++++++++++
+
+* Render query templates with autoescaping disabled, so parameter values are
+  substituted verbatim. HTML-escaping previously corrupted query-significant
+  characters such as ``<``, ``&`` and ``"``.
+
 0.1.12 (2022-07-07)
 +++++++++++++++++++
 
