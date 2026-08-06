@@ -38,6 +38,12 @@ Supported versions
 +------------+------+------+------+------+
 | Django 5.2 |  Yes |  Yes |  Yes |  Yes |
 +------------+------+------+------+------+
+| Django 6.0 |   No |   No |  Yes |  Yes |
++------------+------+------+------+------+
+| Django 6.1 |   No |   No |  Yes |  Yes |
++------------+------+------+------+------+
+
+Django 6.0 and 6.1 require Python 3.12 or newer.
 
 
 Running Tests
