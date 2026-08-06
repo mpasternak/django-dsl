@@ -45,7 +45,7 @@ jobs:
           uv pip install "Django~=${{ matrix.django-version }}.0"
 
       - name: Run tests
-        run: uv run pytest
+        run: uv run --no-sync pytest
 
   lint:
     runs-on: ubuntu-latest
