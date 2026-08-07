@@ -3,8 +3,8 @@
 History
 -------
 
-unreleased
-++++++++++
+0.1.15 (2026-08-07)
++++++++++++++++++++
 
 * Added support for Django 6.0 and Django 6.1 (both require Python 3.12 or
   newer).
